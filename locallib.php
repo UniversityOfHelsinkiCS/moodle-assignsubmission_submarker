@@ -68,165 +68,6 @@ class assign_submission_submissionmarker extends assign_submission_plugin {
     }
 
     /**
-     * Get the saved text content from the editor
-     *
-     * @param string $name
-     * @param int $submissionid
-     * @return string
-     */
-    public function get_editor_text($name, $submissionid) {
-        if ($name == 'onlinetext') {
-            $onlinetextsubmission = $this->get_onlinetext_submission($submissionid);
-            if ($onlinetextsubmission) {
-                return $onlinetextsubmission->onlinetext;
-            }
-        }
-
-        return '';
-    }
-
-    /**
-     * Get the content format for the editor
-     *
-     * @param string $name
-     * @param int $submissionid
-     * @return int
-     */
-    public function get_editor_format($name, $submissionid) {
-        if ($name == 'onlinetext') {
-            $onlinetextsubmission = $this->get_onlinetext_submission($submissionid);
-            if ($onlinetextsubmission) {
-                return $onlinetextsubmission->onlineformat;
-            }
-        }
-
-        return 0;
-    }
-
-
-     /**
-      * Display onlinetext word count in the submission status table
-      *
-      * @param stdClass $submission
-      * @param bool $showviewlink - If the summary has been truncated set this to true
-      * @return string
-      */
-    public function view_summary(stdClass $submission, & $showviewlink) {
-        global $CFG;
-
-        $onlinetextsubmission = $this->get_onlinetext_submission($submission->id);
-        // Always show the view link.
-        $showviewlink = true;
-
-        if ($onlinetextsubmission) {
-            $text = $this->assignment->render_editor_content(ASSIGNSUBMISSION_ONLINETEXT_FILEAREA,
-                                                             $onlinetextsubmission->submission,
-                                                             $this->get_type(),
-                                                             'onlinetext',
-                                                             'assignsubmission_onlinetext');
-
-            $shorttext = shorten_text($text, 140);
-            $plagiarismlinks = '';
-
-            if (!empty($CFG->enableplagiarism)) {
-                require_once($CFG->libdir . '/plagiarismlib.php');
-
-                $plagiarismlinks .= plagiarism_get_links(array('userid' => $submission->userid,
-                    'content' => trim($onlinetextsubmission->onlinetext),
-                    'cmid' => $this->assignment->get_course_module()->id,
-                    'course' => $this->assignment->get_course()->id,
-                    'assignment' => $submission->assignment));
-            }
-            if ($text != $shorttext) {
-                $wordcount = get_string('numwords', 'assignsubmission_onlinetext', count_words($text));
-
-                return $plagiarismlinks . $wordcount . $shorttext;
-            } else {
-                return $plagiarismlinks . $shorttext;
-            }
-        }
-        return '';
-    }
-
-    /**
-     * Produce a list of files suitable for export that represent this submission.
-     *
-     * @param stdClass $submission - For this is the submission data
-     * @param stdClass $user - This is the user record for this submission
-     * @return array - return an array of files indexed by filename
-     */
-    public function get_files(stdClass $submission, stdClass $user) {
-        global $DB;
-
-        $files = array();
-        $onlinetextsubmission = $this->get_onlinetext_submission($submission->id);
-
-        if ($onlinetextsubmission) {
-            $finaltext = $this->assignment->download_rewrite_pluginfile_urls($onlinetextsubmission->onlinetext, $user, $this);
-            $formattedtext = format_text($finaltext,
-                                         $onlinetextsubmission->onlineformat,
-                                         array('context'=>$this->assignment->get_context()));
-            $head = '<head><meta charset="UTF-8"></head>';
-            $submissioncontent = '<!DOCTYPE html><html>' . $head . '<body>'. $formattedtext . '</body></html>';
-
-            $filename = get_string('onlinetextfilename', 'assignsubmission_onlinetext');
-            $files[$filename] = array($submissioncontent);
-
-            $fs = get_file_storage();
-
-            $fsfiles = $fs->get_area_files($this->assignment->get_context()->id,
-                                           'assignsubmission_onlinetext',
-                                           ASSIGNSUBMISSION_ONLINETEXT_FILEAREA,
-                                           $submission->id,
-                                           'timemodified',
-                                           false);
-
-            foreach ($fsfiles as $file) {
-                $files[$file->get_filename()] = $file;
-            }
-        }
-
-        return $files;
-    }
-
-    /**
-     * Display the saved text content from the editor in the view table
-     *
-     * @param stdClass $submission
-     * @return string
-     */
-    public function view(stdClass $submission) {
-        global $CFG;
-        $result = '';
-
-        $onlinetextsubmission = $this->get_onlinetext_submission($submission->id);
-
-        if ($onlinetextsubmission) {
-
-            // Render for portfolio API.
-            $result .= $this->assignment->render_editor_content(ASSIGNSUBMISSION_ONLINETEXT_FILEAREA,
-                                                                $onlinetextsubmission->submission,
-                                                                $this->get_type(),
-                                                                'onlinetext',
-                                                                'assignsubmission_onlinetext');
-
-            $plagiarismlinks = '';
-
-            if (!empty($CFG->enableplagiarism)) {
-                require_once($CFG->libdir . '/plagiarismlib.php');
-
-                $plagiarismlinks .= plagiarism_get_links(array('userid' => $submission->userid,
-                    'content' => trim($onlinetextsubmission->onlinetext),
-                    'cmid' => $this->assignment->get_course_module()->id,
-                    'course' => $this->assignment->get_course()->id,
-                    'assignment' => $submission->assignment));
-            }
-        }
-
-        return $plagiarismlinks . $result;
-    }
-
-    /**
      * The assignment has been deleted - cleanup
      *
      * @return bool
@@ -255,5 +96,17 @@ class assign_submission_submissionmarker extends assign_submission_plugin {
      */
     public function get_config_for_external() {
         return (array) $this->get_config();
+    }
+    
+    /**
+     * Build submission
+     */
+    public function get_form_elements($submission, MoodleQuickForm $mform, stdClass $data) {
+        $mform->addElement('advcheckbox', 'test1', 'Display 1', null, array(group => 1));
+        $mform->addElement('advcheckbox', 'test2', 'Display 2', null, array(group => 1));
+        $mform->addElement('advcheckbox', 'test3', 'Display 3', null, array(group => 1));
+        $mform->addElement('advcheckbox', 'test4', 'Display 4', null, array(group => 1));
+        
+        return true;
     }
 }
