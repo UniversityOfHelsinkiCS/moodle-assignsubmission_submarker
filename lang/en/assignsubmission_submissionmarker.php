@@ -31,3 +31,5 @@ $string['default_help'] = 'If set, this submission method will be enabled by def
 $string['enabled'] = 'Submission marking';
 $string['enabled_help'] = 'If enabled, students are able to mark which tasks are done for their submission.';
 $string['pluginname'] = 'Submission marker';
+$string['submissionmarker'] = 'Submission marker';
+$string['submissionmarkersubmission'] = 'Allow marking submissions';
