@@ -15,17 +15,13 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Plugin administration pages are defined here.
+ * This file defines the admin settings for this plugin
  *
- * @package     assignsubmission_submissionmarker
- * @category    admin
- * @copyright   2017 University of Helsinki
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package   assignsubmission_onlinetext
+ * @copyright 2017 University of Helsinki
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-
-if ($ADMIN->fulltree) {
-   // TODO: Define the plugin settings page.
-   // https://docs.moodle.org/dev/Admin_settings
-}
+$settings->add(new admin_setting_configcheckbox('assignsubmission_submissionmarker/default',
+                   new lang_string('default', 'assignsubmission_submissionmarker'),
+                   new lang_string('default_help', 'assignsubmission_submissionmarker'), 0));
