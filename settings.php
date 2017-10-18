@@ -17,7 +17,7 @@
 /**
  * This file defines the admin settings for this plugin
  *
- * @package   assignsubmission_onlinetext
+ * @package   assignsubmission_submissionmarker
  * @copyright 2017 University of Helsinki
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
