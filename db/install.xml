@@ -1,22 +1,22 @@
-<!-- <?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <XMLDB PATH="mod/assign/submission/submissionmarker/db" VERSION="20120423" COMMENT="XMLDB file for Moodle mod/assign/submission/submissionmarker"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../../../lib/xmldb/xmldb.xsd"
 >
   <TABLES>
-    <TABLE NAME="assignsubmission_submissionmarker" COMMENT="The amount of exercises a student has done">
+    <TABLE NAME="assignsubmission_submarker" COMMENT="The amount of exercises a student has done">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="assignment" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="submission" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
-        <FIELD NAME="exercises" TYPE="int" NOTNULL="true" SEQUENCE="false" DEFAULT="0" COMMENT="Total count of exercises"/>
-        <FIELD NAME="completedexercises" TYPE="text" LENGTH="40" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="The format for this online text submission."/>
+        <FIELD NAME="exercises" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Total count of exercises"/>
+        <FIELD NAME="completedexercises" TYPE="text" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT="The format for this submissionmarker submission."/>
       </FIELDS>
       <KEYS>
-        <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="The unique id for this onlinetext submission."/>
-        <KEY NAME="assignment" TYPE="foreign" FIELDS="assignment" REFTABLE="assign" REFFIELDS="id" COMMENT="The assignment instance this online text submission relates to."/>
-        <KEY NAME="submission" TYPE="foreign" FIELDS="submission" REFTABLE="assign_submission" REFFIELDS="id" COMMENT="The submission this online text submission relates to."/>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="The unique id for this submissionmarker submission."/>
+        <KEY NAME="assignment" TYPE="foreign" FIELDS="assignment" REFTABLE="assign" REFFIELDS="id" COMMENT="The assignment instance this submissionmarker submission relates to."/>
+        <KEY NAME="submission" TYPE="foreign" FIELDS="submission" REFTABLE="assign_submission" REFFIELDS="id" COMMENT="The submission this submissionmarker submission relates to."/>
       </KEYS>
     </TABLE>
   </TABLES>
-</XMLDB> -->
+</XMLDB>
