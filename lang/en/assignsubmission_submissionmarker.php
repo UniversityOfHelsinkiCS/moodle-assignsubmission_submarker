@@ -33,3 +33,5 @@ $string['enabled_help'] = 'If enabled, students are able to mark which tasks are
 $string['pluginname'] = 'Submission marker';
 $string['submissionmarker'] = 'Submission marker';
 $string['submissionmarkersubmission'] = 'Allow marking submissions';
+$string['exercisecount'] = 'The amount of exercises';
+$string['exercisecount_help'] = 'The amount of exercises, help';

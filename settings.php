@@ -25,3 +25,7 @@
 $settings->add(new admin_setting_configcheckbox('assignsubmission_submissionmarker/default',
                    new lang_string('default', 'assignsubmission_submissionmarker'),
                    new lang_string('default_help', 'assignsubmission_submissionmarker'), 0));
+
+$settings->add(new admin_setting_configtext('assignsubmission_submissionmarker/exercisecount',
+                   new lang_string('exercisecount', 'assignsubmission_submissionmarker'),
+                   new lang_string('exercisecount_help', 'assignsubmission_submissionmarker'), 20, PARAM_INT));
