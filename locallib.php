@@ -118,9 +118,9 @@ class assign_submission_submissionmarker extends assign_submission_plugin {
         
         for ($i = 1; $i <= $this->get_config('exercisecount'); $i++) {
             $checked = $checked . "0";
-            $mform->addElement('advcheckbox', 'test' . ($i), 'Exercise  ' . ($i), null, array(group => 1));
+            $mform->addElement('advcheckbox', 'exerchkbox' . ($i), 'Exercise  ' . ($i), null, array(group => 1));
             if ($checked[$i-1] == 1) {
-                $mform->setDefault('test' . ($i), true);
+                $mform->setDefault('exerchkbox' . ($i), true);
             }
         }
         return true;
@@ -166,7 +166,7 @@ class assign_submission_submissionmarker extends assign_submission_plugin {
     function get_exercises_for_DB($data) {
         $checked = "";
         foreach($data as $key=>$value) {
-            if (substr( $key, 0, 4 ) === "test") {
+            if (substr( $key, 0, 10 ) === "exerchkbox") {
                 $checked = $checked . $value;
             }
         }
