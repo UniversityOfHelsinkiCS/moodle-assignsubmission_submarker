@@ -42,8 +42,6 @@ class assign_submission_submissionmarker extends assign_submission_plugin {
      * @return string
      */
     public function get_name() {
-        $vari = "yolo000";
-        echo '<script>console.log("ASDFASDFASDFSAFSA")</script>';
         return get_string('submissionmarker', 'assignsubmission_submissionmarker');
     }
 
@@ -56,7 +54,7 @@ class assign_submission_submissionmarker extends assign_submission_plugin {
     private function get_submissionmarker_submission($submissionid) {
         global $DB;
 
-        return $DB->get_record('assignsubmission_submissionmarker', array('submission' => $submissionid));
+        return $DB->get_record('assignsubmission_submarker', array('submission' => $submissionid));
     }
 
     /**
@@ -82,7 +80,7 @@ class assign_submission_submissionmarker extends assign_submission_plugin {
      */
     public function delete_instance() {
         global $DB;
-        $DB->delete_records('assignsubmission_submissionmarker', array('assignment' => $this->assignment->get_instance()->id));
+        $DB->delete_records('assignsubmission_submarker', array('assignment' => $this->assignment->get_instance()->id));
 
         return true;
     }
@@ -157,6 +155,10 @@ class assign_submission_submissionmarker extends assign_submission_plugin {
         fclose($log);
     }
 
+    function get_exercises_for_DB() {
+        return "1001";
+    }
+    
     /**
      * Save data to the database.
      *
@@ -170,7 +172,7 @@ class assign_submission_submissionmarker extends assign_submission_plugin {
         /** $submission:
          * O:8:"stdClass":9:{s:2:"id";s:1:"6";s:10:"assignment";s:1:"3";s:6:"userid";s:1:"6";s:11:"timecreated";s:10:"1508317343";s:12:"timemodified";s:10:"1508324885";s:6:"status";s:9:"submitted";s:7:"groupid";s:1:"0";s:13:"attemptnumber";s:1:"0";s:6:"latest";s:1:"1";}
          */
-
+        
         $options = $this->get_edit_options();
 
         $data = file_postupdate_standard_editor($data, 
@@ -228,11 +230,12 @@ class assign_submission_submissionmarker extends assign_submission_plugin {
           'groupid' => $groupid,
           'groupname' => $groupname
         );
+        
+        $exercises = $this->get_exercises_for_DB();
 
         if ($submissionmarkersubmission) {
           //Update
-          $submissionmarkersubmission->exercises = $data->exercises;
-          $submissionmarkersubmission->completedexercises = $data->completedexercises;
+          $submissionmarkersubmission->exercises = $exercises;
           $params['objectid'] = $submissionmarkersubmission->id;
           $updatestatus = $DB->update_record('assignsubmission_submarker', $submissionmarkersubmission);
           $event = \assignsubmission_submissionmarker\event\submission_updated::create($params);
@@ -243,8 +246,7 @@ class assign_submission_submissionmarker extends assign_submission_plugin {
         } else {
           //Create
           $submissionmarkersubmission = new stdClass();
-          $submissionmarkersubmission->exercises = $data->exercises;
-          $submissionmarkersubmission->completedexercises = $data->completedexercises;
+          $submissionmarkersubmission->exercises = $exercises;
 
           $submissionmarkersubmission->submission = $submission->id;
           $submissionmarkersubmission->assignment = $this->assignment->get_instance()->id;

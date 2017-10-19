@@ -9,8 +9,7 @@
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="assignment" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="submission" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
-        <FIELD NAME="exercises" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Total count of exercises"/>
-        <FIELD NAME="completedexercises" TYPE="text" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT="The format for this submissionmarker submission."/>
+        <FIELD NAME="exercises" TYPE="text" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Completed exercises"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="The unique id for this submissionmarker submission."/>
