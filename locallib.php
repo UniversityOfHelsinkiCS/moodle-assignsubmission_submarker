@@ -107,14 +107,22 @@ class assign_submission_submissionmarker extends assign_submission_plugin {
      * Build submission
      */
     public function get_form_elements($submission, MoodleQuickForm $mform, stdClass $data) {
-        for ($i = 1; $i <= $this->get_config('exercisecount'); $i++) {
-            $mform->addElement('advcheckbox', 'test' . ($i), 'Exercise  ' . ($i), null, array(group => 1));
+        $checked = "";
+        if ($submission) {
+            $submissionmarkersubmission = $this->get_submissionmarker_submission($submission->id);
+            if ($submissionmarkersubmission) {
+                //exercises should be something like "10011"
+                $checked = $submissionmarkersubmission->exercises;
+            }
         }
-
-        // $mform->addElement('advcheckbox', 'test2', 'Display 2', null, array(group => 1));
-        // $mform->addElement('advcheckbox', 'test3', 'Display 3', null, array(group => 1));
-        // $mform->addElement('advcheckbox', 'test4', 'Display 4', null, array(group => 1));
-
+        
+        for ($i = 1; $i <= $this->get_config('exercisecount'); $i++) {
+            $checked = $checked . "0";
+            $mform->addElement('advcheckbox', 'test' . ($i), 'Exercise  ' . ($i), null, array(group => 1));
+            if ($checked[$i-1] == 1) {
+                $mform->setDefault('test' . ($i), true);
+            }
+        }
         return true;
     }
 
@@ -155,8 +163,14 @@ class assign_submission_submissionmarker extends assign_submission_plugin {
         fclose($log);
     }
 
-    function get_exercises_for_DB() {
-        return "1001";
+    function get_exercises_for_DB($data) {
+        $checked = "";
+        foreach($data as $key=>$value) {
+            if (substr( $key, 0, 4 ) === "test") {
+                $checked = $checked . $value;
+            }
+        }
+        return $checked;
     }
     
     /**
@@ -231,7 +245,7 @@ class assign_submission_submissionmarker extends assign_submission_plugin {
           'groupname' => $groupname
         );
         
-        $exercises = $this->get_exercises_for_DB();
+        $exercises = $this->get_exercises_for_DB($data);
 
         if ($submissionmarkersubmission) {
           //Update
