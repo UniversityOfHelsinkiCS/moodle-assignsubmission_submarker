@@ -115,7 +115,7 @@ class assign_submission_submissionmarker extends assign_submission_plugin {
                 $checked = $submissionmarkersubmission->exercises;
             }
         }
-        
+
         for ($i = 1; $i <= $this->get_config('exercisecount'); $i++) {
             $checked = $checked . "0";
             $mform->addElement('advcheckbox', 'exerchkbox' . ($i), 'Exercise  ' . ($i), null, array(group => 1));
@@ -172,7 +172,7 @@ class assign_submission_submissionmarker extends assign_submission_plugin {
         }
         return $checked;
     }
-    
+
     /**
      * Save data to the database.
      *
@@ -186,21 +186,21 @@ class assign_submission_submissionmarker extends assign_submission_plugin {
         /** $submission:
          * O:8:"stdClass":9:{s:2:"id";s:1:"6";s:10:"assignment";s:1:"3";s:6:"userid";s:1:"6";s:11:"timecreated";s:10:"1508317343";s:12:"timemodified";s:10:"1508324885";s:6:"status";s:9:"submitted";s:7:"groupid";s:1:"0";s:13:"attemptnumber";s:1:"0";s:6:"latest";s:1:"1";}
          */
-        
+
         $options = $this->get_edit_options();
 
-        $data = file_postupdate_standard_editor($data, 
-                'submissionmarker', 
-                $options, 
-                $this->assignment->get_context(), 
-                'assignsubmission_submissionmarker', 
-                ASSIGNSUBMISSION_SUBMISSIONMARKER_FILEAREA, 
+        $data = file_postupdate_standard_editor($data,
+                'submissionmarker',
+                $options,
+                $this->assignment->get_context(),
+                'assignsubmission_submissionmarker',
+                ASSIGNSUBMISSION_SUBMISSIONMARKER_FILEAREA,
                 $submission->id);
 
         /** $data 4 and 7 checked:
          * O:8:"stdClass":20:{s:12:"lastmodified";i:1508326015;s:17:"files_filemanager";i:126731301;s:5:"test1";s:1:"0";s:5:"test2";s:1:"0";s:5:"test3";s:1:"0";s:5:"test4";s:1:"1";s:5:"test5";s:1:"0";s:5:"test6";s:1:"0";s:5:"test7";s:1:"1";s:5:"test8";s:1:"0";s:5:"test9";s:1:"0";s:6:"test10";s:1:"0";s:2:"id";i:4;s:6:"userid";i:6;s:6:"action";s:14:"savesubmission";s:12:"submitbutton";s:12:"Save changes";s:5:"files";s:1:"1";s:21:"submissionmarkertrust";i:0;s:16:"submissionmarker";N;s:22:"submissionmarkerformat";N;}
          */
-        
+
         $submissionmarkersubmission = $this->get_submissionmarker_submission($submission->id);
 
         $fs = get_file_storage();
@@ -244,7 +244,7 @@ class assign_submission_submissionmarker extends assign_submission_plugin {
           'groupid' => $groupid,
           'groupname' => $groupname
         );
-        
+
         $exercises = $this->get_exercises_for_DB($data);
 
         if ($submissionmarkersubmission) {
@@ -255,7 +255,7 @@ class assign_submission_submissionmarker extends assign_submission_plugin {
           $event = \assignsubmission_submissionmarker\event\submission_updated::create($params);
           $event->set_assign($this->assignment);
           $event->trigger();
-          
+
           return $updatestatus;
         } else {
           //Create
@@ -271,6 +271,22 @@ class assign_submission_submissionmarker extends assign_submission_plugin {
           $event->trigger();
           return $submissionmarkersubmission->id > 0;
         }
+    }
+
+    public function show_completed_exercises($exercises) {
+      $res = '';
+      for ($i = 1; $i <= strlen($exercises); $i++){
+        if ($exercises[$i - 1] == '1') {
+            $res .= $i.', ';
+        }
+      }
+      return $res;
+    }
+
+    public function view_summary(stdClass $submission, & $showviewlink) {
+        $submissionmarkersubmission = $this->get_submissionmarker_submission($submission->id);
+        $exer = $submissionmarkersubmission->exercises;
+        return $this->show_completed_exercises($exer);
     }
 
 }
