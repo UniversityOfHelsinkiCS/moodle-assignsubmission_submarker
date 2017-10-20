@@ -107,6 +107,8 @@ class assign_submission_submissionmarker extends assign_submission_plugin {
      * Build submission
      */
     public function get_form_elements($submission, MoodleQuickForm $mform, stdClass $data) {
+        $this->debugObject($submission);
+
         $checked = "";
         if ($submission) {
             $submissionmarkersubmission = $this->get_submissionmarker_submission($submission->id);
@@ -207,8 +209,6 @@ class assign_submission_submissionmarker extends assign_submission_plugin {
 
         $files = $fs->get_area_files($this->assignment->get_context()->id, 'assignsubmission_submissionmarker', ASSIGNSUBMISSION_SUBMISSIONMARKER_FILEAREA, $submission->id, 'id', false);
 
-        // Maybe check if none are checked idk
-
         $params = array(
           'context' => context_module::instance($this->assignment->get_course_module()->id),
           'courseid' => $this->assignment->get_course()->id,
@@ -236,7 +236,8 @@ class assign_submission_submissionmarker extends assign_submission_plugin {
 
           // Unset the objectid and other field from params for use in submission events.
         unset($params['objectid']);
-        unset($params['other']);
+        unset($params['other']);        $this->debugObject($submission);
+
         $params['other'] = array(
           'submissionid' => $submission->id,
           'submissionattempt' => $submission->attemptnumber,
@@ -273,20 +274,73 @@ class assign_submission_submissionmarker extends assign_submission_plugin {
         }
     }
 
-    public function show_completed_exercises($exercises) {
+    public function exercises_readable($exercises) {
       $res = '';
       for ($i = 1; $i <= strlen($exercises); $i++){
         if ($exercises[$i - 1] == '1') {
             $res .= $i.', ';
         }
       }
+      if(strlen($res) > 1) {
+        $res = substr($res, 0, -2);
+      }
       return $res;
     }
 
+    /**
+     * Display the completed exercises in the submission status table
+     *
+     * @param stdClass $submission
+     * @param bool $showviewlink Set this to true if the list of files is long
+     * @return string
+     */
     public function view_summary(stdClass $submission, & $showviewlink) {
-        $submissionmarkersubmission = $this->get_submissionmarker_submission($submission->id);
-        $exer = $submissionmarkersubmission->exercises;
-        return $this->show_completed_exercises($exer);
+      $this->debug("Summary");
+
+      $submissionmarkersubmission = $this->get_submissionmarker_submission($submission->id);
+      $this->debugObject($submissionmarkersubmission);
+      $exer = $submissionmarkersubmission->exercises;
+      return $this->exercises_readable($exer);
+    }
+
+    /**
+     * Copy the student's submission from a previous submission. Used when a student opts to base their resubmission
+     * on the last submission.
+     * @param stdClass $sourcesubmission
+     * @param stdClass $destsubmission
+     */
+    public function copy_submission(stdClass $sourcesubmission, stdClass $destsubmission) {
+        global $DB;
+
+        // Copy the files across.
+        $contextid = $this->assignment->get_context()->id;
+        $fs = get_file_storage();
+        $files = $fs->get_area_files($contextid,
+                                     'assignsubmission_submissionmarker',
+                                     ASSIGNSUBMISSION_SUBMISSIONMARKER_FILEAREA,
+                                     $sourcesubmission->id,
+                                     'id',
+                                     false);
+        foreach ($files as $file) {
+            $fieldupdates = array('itemid' => $destsubmission->id);
+            $fs->create_file_from_storedfile($fieldupdates, $file);
+        }
+
+        // Copy the assignsubmission_submissionmarker record.
+        if ($submissionmarkersubmission = $this->get_submissionmarker_submission($sourcesubmission->id)) {
+            unset($submissionmarkersubmission->id);
+            $submissionmarkersubmission->submission = $destsubmission->id;
+            $DB->insert_record('assignsubmission_submarker', $submissionmarkersubmission);
+        }
+        return true;
+    }
+
+    /**
+     * Return true if there are no submission files
+     * @param stdClass $submission
+     */
+    public function is_empty(stdClass $submission) {
+        return false;
     }
 
 }
