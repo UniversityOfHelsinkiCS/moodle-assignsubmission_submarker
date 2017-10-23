@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace assignsubmission_submissionmarker\event;
+namespace assignsubmission_submarker\event;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -47,7 +47,7 @@ class submission_updated extends \mod_assign\event\submission_updated {
      */
     protected function init() {
         parent::init();
-        $this->data['objecttable'] = 'assignsubmission_submissionmarker';
+        $this->data['objecttable'] = 'assignsubmission_submarker';
     }
 
     /**
@@ -69,6 +69,6 @@ class submission_updated extends \mod_assign\event\submission_updated {
 
     public static function get_objectid_mapping() {
         // No mapping available for 'assignsubmission_file'.
-        return array('db' => 'assignsubmission_submissionmarker', 'restore' => \core\event\base::NOT_MAPPED);
+        return array('db' => 'assignsubmission_submarker', 'restore' => \core\event\base::NOT_MAPPED);
     }
 }

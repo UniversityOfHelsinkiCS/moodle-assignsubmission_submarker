@@ -20,29 +20,29 @@
  *
  * This class provides all the functionality for the new assign module.
  *
- * @package submissions_submissionmarker
+ * @package submissions_submarker
  * @copyright 2012 NetSpot {@link http://www.netspot.com.au}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
 // File area for online text submission assignment.
-define('ASSIGNSUBMISSION_SUBMISSIONMARKER_FILEAREA', 'submissions_submissionmarker');
+define('ASSIGNSUBMISSION_SUBMARKER_FILEAREA', 'submissions_submarker');
 
 /**
- * library class for submissionmarker submission plugin extending submission plugin base class
+ * library class for submarker submission plugin extending submission plugin base class
  *
- * @package assignsubmission_submissionmarker
+ * @package assignsubmission_submarker
  * @copyright 2012 NetSpot {@link http://www.netspot.com.au}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class assign_submission_submissionmarker extends assign_submission_plugin {
+class assign_submission_submarker extends assign_submission_plugin {
 
     /**
      * Get the name of the online text submission plugin
      * @return string
      */
     public function get_name() {
-        return get_string('submissionmarker', 'assignsubmission_submissionmarker');
+        return get_string('submarker', 'assignsubmission_submarker');
     }
 
     /**
@@ -51,7 +51,7 @@ class assign_submission_submissionmarker extends assign_submission_plugin {
      * @param  int $submissionid
      * @return mixed
      */
-    private function get_submissionmarker_submission($submissionid) {
+    private function get_submarker_submission($submissionid) {
         global $DB;
 
         return $DB->get_record('assignsubmission_submarker', array('submission' => $submissionid));
@@ -63,7 +63,7 @@ class assign_submission_submissionmarker extends assign_submission_plugin {
      * @return array An array of field names and descriptions. (name=>description, ...)
      */
     public function get_editor_fields() {
-        return array('submissionmarker' => get_string('pluginname', 'assignsubmission_submissionmarker'));
+        return array('submarker' => get_string('pluginname', 'assignsubmission_submarker'));
     }
 
     private function get_edit_options() {
@@ -90,7 +90,7 @@ class assign_submission_submissionmarker extends assign_submission_plugin {
      * @return array - An array of fileareas (keys) and descriptions (values)
      */
     public function get_file_areas() {
-        return array(ASSIGNSUBMISSION_SUBMISSIONMARKER_FILEAREA => $this->get_name());
+        return array(ASSIGNSUBMISSION_SUBMARKER_FILEAREA => $this->get_name());
     }
 
     /**
@@ -109,10 +109,10 @@ class assign_submission_submissionmarker extends assign_submission_plugin {
     public function get_form_elements($submission, MoodleQuickForm $mform, stdClass $data) {
         $checked = "";
         if ($submission) {
-            $submissionmarkersubmission = $this->get_submissionmarker_submission($submission->id);
-            if ($submissionmarkersubmission) {
+            $submarkersubmission = $this->get_submarker_submission($submission->id);
+            if ($submarkersubmission) {
                 //exercises should be something like "10011"
-                $checked = $submissionmarkersubmission->exercises;
+                $checked = $submarkersubmission->exercises;
             }
         }
 
@@ -129,12 +129,12 @@ class assign_submission_submissionmarker extends assign_submission_plugin {
     public function get_settings(MoodleQuickForm $mform) {
         $settings = array();
         $options = array();
-        for ($i = 1; $i <= get_config('assignsubmission_submissionmarker', 'exercisecount'); $i++) {
+        for ($i = 1; $i <= get_config('assignsubmission_submarker', 'exercisecount'); $i++) {
             $options[$i] = $i;
         }
-        $name = get_string('exercisecount', 'assignsubmission_submissionmarker');
+        $name = get_string('exercisecount', 'assignsubmission_submarker');
 
-        $mform->addElement('select', 'assignsubmission_submissionmarker_exercisecount', $name, $options);
+        $mform->addElement('select', 'assignsubmission_submarker_exercisecount', $name, $options);
     }
 
     /**
@@ -144,7 +144,7 @@ class assign_submission_submissionmarker extends assign_submission_plugin {
      * @return bool
      */
     public function save_settings(stdClass $data) {
-        $this->set_config('exercisecount', $data->assignsubmission_submissionmarker_exercisecount);
+        $this->set_config('exercisecount', $data->assignsubmission_submarker_exercisecount);
         return true;
     }
 
@@ -190,22 +190,22 @@ class assign_submission_submissionmarker extends assign_submission_plugin {
         $options = $this->get_edit_options();
 
         $data = file_postupdate_standard_editor($data,
-                'submissionmarker',
+                'submarker',
                 $options,
                 $this->assignment->get_context(),
-                'assignsubmission_submissionmarker',
-                ASSIGNSUBMISSION_SUBMISSIONMARKER_FILEAREA,
+                'assignsubmission_submarker',
+                ASSIGNSUBMISSION_SUBMARKER_FILEAREA,
                 $submission->id);
 
         /** $data 4 and 7 checked:
-         * O:8:"stdClass":20:{s:12:"lastmodified";i:1508326015;s:17:"files_filemanager";i:126731301;s:5:"test1";s:1:"0";s:5:"test2";s:1:"0";s:5:"test3";s:1:"0";s:5:"test4";s:1:"1";s:5:"test5";s:1:"0";s:5:"test6";s:1:"0";s:5:"test7";s:1:"1";s:5:"test8";s:1:"0";s:5:"test9";s:1:"0";s:6:"test10";s:1:"0";s:2:"id";i:4;s:6:"userid";i:6;s:6:"action";s:14:"savesubmission";s:12:"submitbutton";s:12:"Save changes";s:5:"files";s:1:"1";s:21:"submissionmarkertrust";i:0;s:16:"submissionmarker";N;s:22:"submissionmarkerformat";N;}
+         * O:8:"stdClass":20:{s:12:"lastmodified";i:1508326015;s:17:"files_filemanager";i:126731301;s:5:"test1";s:1:"0";s:5:"test2";s:1:"0";s:5:"test3";s:1:"0";s:5:"test4";s:1:"1";s:5:"test5";s:1:"0";s:5:"test6";s:1:"0";s:5:"test7";s:1:"1";s:5:"test8";s:1:"0";s:5:"test9";s:1:"0";s:6:"test10";s:1:"0";s:2:"id";i:4;s:6:"userid";i:6;s:6:"action";s:14:"savesubmission";s:12:"submitbutton";s:12:"Save changes";s:5:"files";s:1:"1";s:21:"submarkertrust";i:0;s:16:"submarker";N;s:22:"submarkerformat";N;}
          */
 
-        $submissionmarkersubmission = $this->get_submissionmarker_submission($submission->id);
+        $submarkersubmission = $this->get_submarker_submission($submission->id);
 
         $fs = get_file_storage();
 
-        $files = $fs->get_area_files($this->assignment->get_context()->id, 'assignsubmission_submissionmarker', ASSIGNSUBMISSION_SUBMISSIONMARKER_FILEAREA, $submission->id, 'id', false);
+        $files = $fs->get_area_files($this->assignment->get_context()->id, 'assignsubmission_submarker', ASSIGNSUBMISSION_SUBMARKER_FILEAREA, $submission->id, 'id', false);
 
         // Maybe check if none are checked idk
 
@@ -221,7 +221,7 @@ class assign_submission_submissionmarker extends assign_submission_plugin {
         if (!empty($submission->userid) && ($submission->userid != $USER->id)) {
           $params['relateduserid'] = $submission->userid;
         }
-        $event = \assignsubmission_submissionmarker\event\assessable_uploaded::create($params);
+        $event = \assignsubmission_submarker\event\assessable_uploaded::create($params);
         $event->trigger();
 
         $groupname = null;
@@ -247,29 +247,29 @@ class assign_submission_submissionmarker extends assign_submission_plugin {
 
         $exercises = $this->get_exercises_for_DB($data);
 
-        if ($submissionmarkersubmission) {
+        if ($submarkersubmission) {
           //Update
-          $submissionmarkersubmission->exercises = $exercises;
-          $params['objectid'] = $submissionmarkersubmission->id;
-          $updatestatus = $DB->update_record('assignsubmission_submarker', $submissionmarkersubmission);
-          $event = \assignsubmission_submissionmarker\event\submission_updated::create($params);
+          $submarkersubmission->exercises = $exercises;
+          $params['objectid'] = $submarkersubmission->id;
+          $updatestatus = $DB->update_record('assignsubmission_submarker', $submarkersubmission);
+          $event = \assignsubmission_submarker\event\submission_updated::create($params);
           $event->set_assign($this->assignment);
           $event->trigger();
 
           return $updatestatus;
         } else {
           //Create
-          $submissionmarkersubmission = new stdClass();
-          $submissionmarkersubmission->exercises = $exercises;
+          $submarkersubmission = new stdClass();
+          $submarkersubmission->exercises = $exercises;
 
-          $submissionmarkersubmission->submission = $submission->id;
-          $submissionmarkersubmission->assignment = $this->assignment->get_instance()->id;
-          $submissionmarkersubmission->id = $DB->insert_record('assignsubmission_submarker', $submissionmarkersubmission);
-          $params['objectid'] = $submissionmarkersubmission->id;
-          $event = \assignsubmission_submissionmarker\event\submission_created::create($params);
+          $submarkersubmission->submission = $submission->id;
+          $submarkersubmission->assignment = $this->assignment->get_instance()->id;
+          $submarkersubmission->id = $DB->insert_record('assignsubmission_submarker', $submarkersubmission);
+          $params['objectid'] = $submarkersubmission->id;
+          $event = \assignsubmission_submarker\event\submission_created::create($params);
           $event->set_assign($this->assignment);
           $event->trigger();
-          return $submissionmarkersubmission->id > 0;
+          return $submarkersubmission->id > 0;
         }
     }
 
@@ -284,8 +284,8 @@ class assign_submission_submissionmarker extends assign_submission_plugin {
     }
 
     public function view_summary(stdClass $submission, & $showviewlink) {
-        $submissionmarkersubmission = $this->get_submissionmarker_submission($submission->id);
-        $exer = $submissionmarkersubmission->exercises;
+        $submarkersubmission = $this->get_submarker_submission($submission->id);
+        $exer = $submarkersubmission->exercises;
         return $this->show_completed_exercises($exer);
     }
 

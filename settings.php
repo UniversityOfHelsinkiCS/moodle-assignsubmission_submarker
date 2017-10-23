@@ -17,15 +17,15 @@
 /**
  * This file defines the admin settings for this plugin
  *
- * @package   assignsubmission_submissionmarker
+ * @package   assignsubmission_submarker
  * @copyright 2017 University of Helsinki
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$settings->add(new admin_setting_configcheckbox('assignsubmission_submissionmarker/default',
-                   new lang_string('default', 'assignsubmission_submissionmarker'),
-                   new lang_string('default_help', 'assignsubmission_submissionmarker'), 0));
+$settings->add(new admin_setting_configcheckbox('assignsubmission_submarker/default',
+                   new lang_string('default', 'assignsubmission_submarker'),
+                   new lang_string('default_help', 'assignsubmission_submarker'), 0));
 
-$settings->add(new admin_setting_configtext('assignsubmission_submissionmarker/exercisecount',
-                   new lang_string('exercisecount', 'assignsubmission_submissionmarker'),
-                   new lang_string('exercisecount_help', 'assignsubmission_submissionmarker'), 20, PARAM_INT));
+$settings->add(new admin_setting_configtext('assignsubmission_submarker/exercisecount',
+                   new lang_string('exercisecount', 'assignsubmission_submarker'),
+                   new lang_string('exercisecount_help', 'assignsubmission_submarker'), 20, PARAM_INT));
