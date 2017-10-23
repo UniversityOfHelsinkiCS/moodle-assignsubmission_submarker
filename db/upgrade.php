@@ -17,7 +17,7 @@
 /**
  * Plugin upgrade steps are defined here.
  *
- * @package     assignsubmission_submissionmarker
+ * @package     assignsubmission_submarker
  * @category    upgrade
  * @copyright   2017 University of Helsinki
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -26,12 +26,12 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Execute assignsubmission_submissionmarker upgrade from the given old version.
+ * Execute assignsubmission_submarker upgrade from the given old version.
  *
  * @param int $oldversion
  * @return bool
  */
-function xmldb_assignsubmission_submissionmarker_upgrade($oldversion) {
+function xmldb_assignsubmission_submarker_upgrade($oldversion) {
     global $DB;
 
     $dbman = $DB->get_manager();

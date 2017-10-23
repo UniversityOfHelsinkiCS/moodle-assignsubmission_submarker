@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="mod/assign/submission/submissionmarker/db" VERSION="20120423" COMMENT="XMLDB file for Moodle mod/assign/submission/submissionmarker"
+<XMLDB PATH="mod/assign/submission/submarker/db" VERSION="20120423" COMMENT="XMLDB file for Moodle mod/assign/submission/submarker"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../../../lib/xmldb/xmldb.xsd"
 >
@@ -12,9 +12,9 @@
         <FIELD NAME="exercises" TYPE="text" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Completed exercises"/>
       </FIELDS>
       <KEYS>
-        <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="The unique id for this submissionmarker submission."/>
-        <KEY NAME="assignment" TYPE="foreign" FIELDS="assignment" REFTABLE="assign" REFFIELDS="id" COMMENT="The assignment instance this submissionmarker submission relates to."/>
-        <KEY NAME="submission" TYPE="foreign" FIELDS="submission" REFTABLE="assign_submission" REFFIELDS="id" COMMENT="The submission this submissionmarker submission relates to."/>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="The unique id for this submarker submission."/>
+        <KEY NAME="assignment" TYPE="foreign" FIELDS="assignment" REFTABLE="assign" REFFIELDS="id" COMMENT="The assignment instance this submarker submission relates to."/>
+        <KEY NAME="submission" TYPE="foreign" FIELDS="submission" REFTABLE="assign_submission" REFFIELDS="id" COMMENT="The submission this submarker submission relates to."/>
       </KEYS>
     </TABLE>
   </TABLES>

@@ -15,21 +15,21 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * The assignsubmission_submissionmarker assessable uploaded event.
+ * The assignsubmission_submarker assessable uploaded event.
  *
- * @package    assignsubmission_submissionmarker
+ * @package    assignsubmission_submarker
  * @copyright  2013 Frédéric Massart
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace assignsubmission_submissionmarker\event;
+namespace assignsubmission_submarker\event;
 
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * The assignsubmission_submissionmarker assessable uploaded event class.
+ * The assignsubmission_submarker assessable uploaded event class.
  *
- * @package    assignsubmission_submissionmarker
+ * @package    assignsubmission_submarker
  * @since      Moodle 2.6
  * @copyright  2013 Frédéric Massart
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -79,7 +79,7 @@ class assessable_uploaded extends \core\event\assessable_uploaded {
      * @return string
      */
     public static function get_legacy_eventname() {
-        return 'assessable_submissionmarker_uploaded';
+        return 'assessable_submarker_uploaded';
     }
 
     /**
@@ -88,7 +88,7 @@ class assessable_uploaded extends \core\event\assessable_uploaded {
      * @return string
      */
     public static function get_name() {
-        return get_string('eventassessableuploaded', 'assignsubmission_submissionmarker');
+        return get_string('eventassessableuploaded', 'assignsubmission_submarker');
     }
 
     /**

@@ -17,7 +17,7 @@
 /**
  * Plugin strings are defined here.
  *
- * @package     assignsubmission_submissionmarker
+ * @package     assignsubmission_submarker
  * @category    string
  * @copyright   2017 University of Helsinki
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -31,7 +31,7 @@ $string['default_help'] = 'If set, this submission method will be enabled by def
 $string['enabled'] = 'Submission marking';
 $string['enabled_help'] = 'If enabled, students are able to mark which tasks are done for their submission.';
 $string['pluginname'] = 'Submission marker';
-$string['submissionmarker'] = 'Submission marker';
-$string['submissionmarkersubmission'] = 'Allow marking submissions';
+$string['submarker'] = 'Submission marker';
+$string['submarkersubmission'] = 'Allow marking submissions';
 $string['exercisecount'] = 'The amount of exercises';
 $string['exercisecount_help'] = 'The amount of exercises, help';

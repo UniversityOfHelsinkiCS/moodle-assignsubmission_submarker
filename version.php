@@ -17,14 +17,14 @@
 /**
  * Plugin version and other meta-data are defined here.
  *
- * @package     assignsubmission_submissionmarker
+ * @package     assignsubmission_submarker
  * @copyright   2017 University of Helsinki
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'assignsubmission_submissionmarker';
+$plugin->component = 'assignsubmission_submarker';
 $plugin->release = '0.1.0';
 $plugin->version = 2017101000;
 $plugin->requires = 2017051500;
