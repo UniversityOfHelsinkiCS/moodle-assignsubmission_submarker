@@ -21,7 +21,7 @@
  * This class provides all the functionality for the new assign module.
  *
  * @package submissions_submarker
- * @copyright 2012 NetSpot {@link http://www.netspot.com.au}
+ * @copyright 2017 University of Helsinki
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
@@ -281,6 +281,8 @@ class assign_submission_submarker extends assign_submission_plugin {
       }
       if(strlen($res) > 1) {
         $res = substr($res, 0, -2);
+      } else {
+        $res = "No exercises returned";
       }
       return $res;
     }
@@ -331,10 +333,13 @@ class assign_submission_submarker extends assign_submission_plugin {
     }
 
     /**
-     * Return true if there are no submission files
+     * Always false, because even if returning no exercises there will be a visible message
      * @param stdClass $submission
      */
     public function is_empty(stdClass $submission) {
+        return false;
+    }
+    public function submission_is_empty(stdClass $data) {
         return false;
     }
 
