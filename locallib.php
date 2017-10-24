@@ -316,7 +316,14 @@ class assign_submission_submarker extends assign_submission_plugin {
         return false;
     }
     public function submission_is_empty(stdClass $data) {
-        return false;
+        foreach($data as $key=>$value) {
+            if (substr( $key, 0, 10 ) === "exerchkbox") {
+                if ($value == '1') {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
 }

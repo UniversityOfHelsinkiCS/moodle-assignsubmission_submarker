@@ -113,7 +113,7 @@ class assignsubmission_submarker_locallib_testcase extends advanced_testcase {
     public function submission_is_empty_testcases() {
       return [
           'Exercises' => [['1', '0', '1'], false],
-          'Empty submission' => [['0','0','0'], false],
+          'Empty submission' => [['0','0','0'], true],
       ];
     }
 }
