@@ -148,21 +148,6 @@ class assign_submission_submarker extends assign_submission_plugin {
         return true;
     }
 
-    function debugObject(stdClass $obj) {
-        $serialized = serialize($obj);
-        $log = fopen("/tmp/debugfile.txt", "a");
-        fwrite($log, "\nObject:\n\n");
-        fwrite($log, $serialized);
-        fclose($log);
-    }
-
-    function debug($vari) {
-        $log = fopen("/tmp/debugfile.txt", "a");
-        fwrite($log, "\nVariable:\n\n");
-        fwrite($log, $vari);
-        fclose($log);
-    }
-
     function exercises_to_text($data) {
         $checked = "";
         foreach($data as $key=>$value) {
