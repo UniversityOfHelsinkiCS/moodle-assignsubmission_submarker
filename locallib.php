@@ -183,10 +183,6 @@ class assign_submission_submarker extends assign_submission_plugin {
     public function save(stdClass $submission, stdClass $data) {
         global $USER, $DB;
 
-        /** $submission:
-         * O:8:"stdClass":9:{s:2:"id";s:1:"6";s:10:"assignment";s:1:"3";s:6:"userid";s:1:"6";s:11:"timecreated";s:10:"1508317343";s:12:"timemodified";s:10:"1508324885";s:6:"status";s:9:"submitted";s:7:"groupid";s:1:"0";s:13:"attemptnumber";s:1:"0";s:6:"latest";s:1:"1";}
-         */
-
         $options = $this->get_edit_options();
 
         $data = file_postupdate_standard_editor($data,
@@ -196,10 +192,6 @@ class assign_submission_submarker extends assign_submission_plugin {
                 'assignsubmission_submarker',
                 ASSIGNSUBMISSION_SUBMARKER_FILEAREA,
                 $submission->id);
-
-        /** $data 4 and 7 checked:
-         * O:8:"stdClass":20:{s:12:"lastmodified";i:1508326015;s:17:"files_filemanager";i:126731301;s:5:"test1";s:1:"0";s:5:"test2";s:1:"0";s:5:"test3";s:1:"0";s:5:"test4";s:1:"1";s:5:"test5";s:1:"0";s:5:"test6";s:1:"0";s:5:"test7";s:1:"1";s:5:"test8";s:1:"0";s:5:"test9";s:1:"0";s:6:"test10";s:1:"0";s:2:"id";i:4;s:6:"userid";i:6;s:6:"action";s:14:"savesubmission";s:12:"submitbutton";s:12:"Save changes";s:5:"files";s:1:"1";s:21:"submarkertrust";i:0;s:16:"submarker";N;s:22:"submarkerformat";N;}
-         */
 
         $submarkersubmission = $this->get_submarker_submission($submission->id);
         $exercises = $this->exercises_to_text($data);
