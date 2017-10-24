@@ -118,7 +118,7 @@ class assign_submission_submarker extends assign_submission_plugin {
 
         for ($i = 1; $i <= $this->get_config('exercisecount'); $i++) {
             $checked = $checked . "0";
-            $mform->addElement('advcheckbox', 'exerchkbox' . ($i), 'Exercise  ' . ($i), null, array(group => 1));
+            $mform->addElement('advcheckbox', 'exerchkbox' . ($i), get_string('exercise', 'assignsubmission_submarker') . ' ' . ($i), null, array(group => 1));
             if ($checked[$i-1] == 1) {
                 $mform->setDefault('exerchkbox' . ($i), true);
             }
@@ -146,21 +146,6 @@ class assign_submission_submarker extends assign_submission_plugin {
     public function save_settings(stdClass $data) {
         $this->set_config('exercisecount', $data->assignsubmission_submarker_exercisecount);
         return true;
-    }
-
-    function debugObject(stdClass $obj) {
-        $serialized = serialize($obj);
-        $log = fopen("/tmp/debugfile.txt", "a");
-        fwrite($log, "\nObject:\n\n");
-        fwrite($log, $serialized);
-        fclose($log);
-    }
-
-    function debug($vari) {
-        $log = fopen("/tmp/debugfile.txt", "a");
-        fwrite($log, "\nVariable:\n\n");
-        fwrite($log, $vari);
-        fclose($log);
     }
 
     function exercises_to_text($data) {
@@ -273,7 +258,7 @@ class assign_submission_submarker extends assign_submission_plugin {
       if(strlen($res) > 1) {
         $res = substr($res, 0, -2);
       } else {
-        $res = "No exercises returned";
+        $res = get_string('no_exercises_returned', 'assignsubmission_submarker');
       }
       return $res;
     }

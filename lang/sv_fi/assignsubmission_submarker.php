@@ -25,15 +25,15 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-
-$string['default'] = 'Enabled by default';
-$string['default_help'] = 'If set, this submission method will be enabled by default for all new assignments.';
-$string['enabled'] = 'Submission marking';
-$string['enabled_help'] = 'If enabled, students are able to mark which tasks are done for their submission.';
-$string['pluginname'] = 'Submission marker';
-$string['submarker'] = 'Submission marker';
-$string['submarkersubmission'] = 'Allow marking submissions';
-$string['exercisecount'] = 'The amount of exercises';
-$string['exercisecount_help'] = 'The amount of exercises, help';
+//Samma på svenska
+$string['default'] = 'Oletusarvoinen käyttöönotto';
+$string['default_help'] = 'Jos asetettu, opiskelijan tehtävienmerkintä on oletusarvioisesti käytössä.';
+$string['enabled'] = 'Opiskelija merkitsee tehtävänsä';
+$string['enabled_help'] = 'Jos asetettu, opiskelija voi merkitä suorittamansa tehtävät tälle palautukselle.';
+$string['pluginname'] = 'Tehtävien merkintä';
+$string['submarker'] = 'Tehtävien merkintä';
+$string['submarkersubmission'] = 'Hyväksy tehtävien merkintä';
+$string['exercisecount'] = 'Tehtävien lukumäärä';
+$string['exercisecount_help'] = 'Maksimilukumäärä, kuinka monta tehtävää voi palautuksessa olla';
 $string['no_exercises_returned'] = 'No exercises returned';
-$string['exercise'] = 'Exercise';
+$string['exercise'] = 'Tehtävä';
