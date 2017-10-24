@@ -25,7 +25,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
-// File area for online text submission assignment.
+// File area for submarker submission assignment.
 define('ASSIGNSUBMISSION_SUBMARKER_FILEAREA', 'submissions_submarker');
 
 /**
@@ -38,7 +38,7 @@ define('ASSIGNSUBMISSION_SUBMARKER_FILEAREA', 'submissions_submarker');
 class assign_submission_submarker extends assign_submission_plugin {
 
     /**
-     * Get the name of the online text submission plugin
+     * Get the name of the submarker submission plugin
      * @return string
      */
     public function get_name() {
@@ -46,7 +46,7 @@ class assign_submission_submarker extends assign_submission_plugin {
     }
 
     /**
-     * Get onlinetext submission information from the database
+     * Get submarker submission information from the database
      *
      * @param  int $submissionid
      * @return mixed

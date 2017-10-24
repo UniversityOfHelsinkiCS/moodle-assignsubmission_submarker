@@ -62,7 +62,7 @@ class submission_updated extends \mod_assign\event\submission_updated {
     }
 
     public static function get_objectid_mapping() {
-        // No mapping available for 'assignsubmission_file'.
+        // No mapping available for 'assignsubmission_submarker'.
         return array('db' => 'assignsubmission_submarker', 'restore' => \core\event\base::NOT_MAPPED);
     }
 }
