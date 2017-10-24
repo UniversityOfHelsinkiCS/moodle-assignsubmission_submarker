@@ -118,7 +118,7 @@ class assign_submission_submarker extends assign_submission_plugin {
 
         for ($i = 1; $i <= $this->get_config('exercisecount'); $i++) {
             $checked = $checked . "0";
-            $mform->addElement('advcheckbox', 'exerchkbox' . ($i), 'Exercise  ' . ($i), null, array(group => 1));
+            $mform->addElement('advcheckbox', 'exerchkbox' . ($i), get_string('exercise', 'assignsubmission_submarker') . ' ' . ($i), null, array(group => 1));
             if ($checked[$i-1] == 1) {
                 $mform->setDefault('exerchkbox' . ($i), true);
             }
@@ -258,7 +258,7 @@ class assign_submission_submarker extends assign_submission_plugin {
       if(strlen($res) > 1) {
         $res = substr($res, 0, -2);
       } else {
-        $res = "No exercises returned";
+        $res = get_string('no_exercises_returned', 'assignsubmission_submarker');
       }
       return $res;
     }
