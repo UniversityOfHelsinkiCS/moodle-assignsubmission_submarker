@@ -163,7 +163,7 @@ class assign_submission_submarker extends assign_submission_plugin {
         fclose($log);
     }
 
-    function get_exercises_for_DB($data) {
+    function exercises_to_text($data) {
         $checked = "";
         foreach($data as $key=>$value) {
             if (substr( $key, 0, 10 ) === "exerchkbox") {
@@ -202,7 +202,8 @@ class assign_submission_submarker extends assign_submission_plugin {
          */
 
         $submarkersubmission = $this->get_submarker_submission($submission->id);
-
+        $exercises = $this->exercises_to_text($data);
+        
         $fs = get_file_storage();
 
         $files = $fs->get_area_files($this->assignment->get_context()->id, 'assignsubmission_submarker', ASSIGNSUBMISSION_SUBMARKER_FILEAREA, $submission->id, 'id', false);
@@ -212,7 +213,7 @@ class assign_submission_submarker extends assign_submission_plugin {
           'courseid' => $this->assignment->get_course()->id,
           'objectid' => $submission->id,
           'other' => array(
-            'content' => '',
+            'content' => $exercises,
             'pathnamehashes' => array_keys($files)
           )
         );
@@ -243,8 +244,6 @@ class assign_submission_submarker extends assign_submission_plugin {
           'groupid' => $groupid,
           'groupname' => $groupname
         );
-
-        $exercises = $this->get_exercises_for_DB($data);
 
         if ($submarkersubmission) {
           //Update

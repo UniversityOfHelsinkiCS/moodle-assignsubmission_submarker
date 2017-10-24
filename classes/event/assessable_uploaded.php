@@ -65,11 +65,9 @@ class assessable_uploaded extends \core\event\assessable_uploaded {
         $eventdata->itemid = $this->objectid;
         $eventdata->courseid = $this->courseid;
         $eventdata->userid = $this->userid;
-        if (count($this->legacyfiles) > 1) {
-            $eventdata->files = $this->legacyfiles;
-        }
-        $eventdata->file = $this->legacyfiles;
-        $eventdata->pathnamehashes = array_keys($this->legacyfiles);
+        if ($this->other['pathnamehashes']) {
+            $eventdata->pathnamehashes = $this->other['pathnamehashes'];
+        }        
         return $eventdata;
     }
 
