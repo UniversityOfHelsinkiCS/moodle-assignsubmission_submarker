@@ -21,7 +21,7 @@
  * This class provides all the functionality for the new assign module.
  *
  * @package submissions_submarker
- * @copyright 2012 NetSpot {@link http://www.netspot.com.au}
+ * @copyright 2017 University of Helsinki
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
@@ -32,7 +32,7 @@ define('ASSIGNSUBMISSION_SUBMARKER_FILEAREA', 'submissions_submarker');
  * library class for submarker submission plugin extending submission plugin base class
  *
  * @package assignsubmission_submarker
- * @copyright 2012 NetSpot {@link http://www.netspot.com.au}
+ * @copyright 2017 University of Helsinki
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class assign_submission_submarker extends assign_submission_plugin {

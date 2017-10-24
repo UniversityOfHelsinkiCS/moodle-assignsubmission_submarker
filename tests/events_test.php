@@ -66,9 +66,9 @@ class assignsubmission_submarker_events_testcase extends advanced_testcase {
         $this->setUser($this->user->id);
         $this->submission = $this->assign->get_user_submission($this->user->id, true);
         $this->data = new stdClass();
-        $this->data->exerchkbox1 = 1;
-        $this->data->exerchkbox2 = 0;
-        $this->data->exerchkbox3 = 1;
+        $this->data->exerchkbox1 = '1';
+        $this->data->exerchkbox2 = '0';
+        $this->data->exerchkbox3 = '1';
     }
 
     /**
