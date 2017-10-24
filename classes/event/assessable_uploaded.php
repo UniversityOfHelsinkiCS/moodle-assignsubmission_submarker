@@ -18,7 +18,7 @@
  * The assignsubmission_submarker assessable uploaded event.
  *
  * @package    assignsubmission_submarker
- * @copyright  2013 Frédéric Massart
+ * @copyright  2017 University of Helsinki
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -30,8 +30,7 @@ defined('MOODLE_INTERNAL') || die();
  * The assignsubmission_submarker assessable uploaded event class.
  *
  * @package    assignsubmission_submarker
- * @since      Moodle 2.6
- * @copyright  2013 Frédéric Massart
+ * @copyright  2017 University of Helsinki
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class assessable_uploaded extends \core\event\assessable_uploaded {
@@ -65,11 +64,9 @@ class assessable_uploaded extends \core\event\assessable_uploaded {
         $eventdata->itemid = $this->objectid;
         $eventdata->courseid = $this->courseid;
         $eventdata->userid = $this->userid;
-        if (count($this->legacyfiles) > 1) {
-            $eventdata->files = $this->legacyfiles;
-        }
-        $eventdata->file = $this->legacyfiles;
-        $eventdata->pathnamehashes = array_keys($this->legacyfiles);
+        if ($this->other['pathnamehashes']) {
+            $eventdata->pathnamehashes = $this->other['pathnamehashes'];
+        }        
         return $eventdata;
     }
 

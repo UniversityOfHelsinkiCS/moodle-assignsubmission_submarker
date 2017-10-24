@@ -15,10 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * The assignsubmission_file submission_created event.
+ * The assignsubmission_submarker submission_created event.
  *
- * @package    assignsubmission_file
- * @copyright  2014 Adrian Greeve <adrian@moodle.com>
+ * @package    assignsubmission_submarker
+ * @copyright  2017 University of Helsinki
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -27,17 +27,10 @@ namespace assignsubmission_submarker\event;
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * The assignsubmission_file submission_created event class.
+ * The assignsubmission_submarker submission_created event class.
  *
- * @property-read array $other {
- *      Extra information about the event.
- *
- *      - int filesubmissioncount: The number of files uploaded.
- * }
- *
- * @package    assignsubmission_file
- * @since      Moodle 2.7
- * @copyright  2014 Adrian Greeve <adrian@moodle.com>
+ * @package    assignsubmission_submarker
+ * @copyright  2017 University of Helsinki
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class submission_created extends \mod_assign\event\submission_created {
@@ -68,7 +61,7 @@ class submission_created extends \mod_assign\event\submission_created {
     }
 
     public static function get_objectid_mapping() {
-        // No mapping available for 'assignsubmission_file'.
+        // No mapping available for 'assignsubmission_submarker'.
         return array('db' => 'assignsubmission_submarker', 'restore' => \core\event\base::NOT_MAPPED);
     }
 }

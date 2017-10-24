@@ -25,20 +25,20 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
-// File area for online text submission assignment.
+// File area for submarker submission assignment.
 define('ASSIGNSUBMISSION_SUBMARKER_FILEAREA', 'submissions_submarker');
 
 /**
  * library class for submarker submission plugin extending submission plugin base class
  *
  * @package assignsubmission_submarker
- * @copyright 2012 NetSpot {@link http://www.netspot.com.au}
+ * @copyright 2017 University of Helsinki
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class assign_submission_submarker extends assign_submission_plugin {
 
     /**
-     * Get the name of the online text submission plugin
+     * Get the name of the submarker submission plugin
      * @return string
      */
     public function get_name() {
@@ -46,7 +46,7 @@ class assign_submission_submarker extends assign_submission_plugin {
     }
 
     /**
-     * Get onlinetext submission information from the database
+     * Get submarker submission information from the database
      *
      * @param  int $submissionid
      * @return mixed
@@ -163,7 +163,7 @@ class assign_submission_submarker extends assign_submission_plugin {
         fclose($log);
     }
 
-    function get_exercises_for_DB($data) {
+    function exercises_to_text($data) {
         $checked = "";
         foreach($data as $key=>$value) {
             if (substr( $key, 0, 10 ) === "exerchkbox") {
@@ -183,10 +183,6 @@ class assign_submission_submarker extends assign_submission_plugin {
     public function save(stdClass $submission, stdClass $data) {
         global $USER, $DB;
 
-        /** $submission:
-         * O:8:"stdClass":9:{s:2:"id";s:1:"6";s:10:"assignment";s:1:"3";s:6:"userid";s:1:"6";s:11:"timecreated";s:10:"1508317343";s:12:"timemodified";s:10:"1508324885";s:6:"status";s:9:"submitted";s:7:"groupid";s:1:"0";s:13:"attemptnumber";s:1:"0";s:6:"latest";s:1:"1";}
-         */
-
         $options = $this->get_edit_options();
 
         $data = file_postupdate_standard_editor($data,
@@ -197,12 +193,9 @@ class assign_submission_submarker extends assign_submission_plugin {
                 ASSIGNSUBMISSION_SUBMARKER_FILEAREA,
                 $submission->id);
 
-        /** $data 4 and 7 checked:
-         * O:8:"stdClass":20:{s:12:"lastmodified";i:1508326015;s:17:"files_filemanager";i:126731301;s:5:"test1";s:1:"0";s:5:"test2";s:1:"0";s:5:"test3";s:1:"0";s:5:"test4";s:1:"1";s:5:"test5";s:1:"0";s:5:"test6";s:1:"0";s:5:"test7";s:1:"1";s:5:"test8";s:1:"0";s:5:"test9";s:1:"0";s:6:"test10";s:1:"0";s:2:"id";i:4;s:6:"userid";i:6;s:6:"action";s:14:"savesubmission";s:12:"submitbutton";s:12:"Save changes";s:5:"files";s:1:"1";s:21:"submarkertrust";i:0;s:16:"submarker";N;s:22:"submarkerformat";N;}
-         */
-
         $submarkersubmission = $this->get_submarker_submission($submission->id);
-
+        $exercises = $this->exercises_to_text($data);
+        
         $fs = get_file_storage();
 
         $files = $fs->get_area_files($this->assignment->get_context()->id, 'assignsubmission_submarker', ASSIGNSUBMISSION_SUBMARKER_FILEAREA, $submission->id, 'id', false);
@@ -212,7 +205,7 @@ class assign_submission_submarker extends assign_submission_plugin {
           'courseid' => $this->assignment->get_course()->id,
           'objectid' => $submission->id,
           'other' => array(
-            'content' => '',
+            'content' => $exercises,
             'pathnamehashes' => array_keys($files)
           )
         );
@@ -243,8 +236,6 @@ class assign_submission_submarker extends assign_submission_plugin {
           'groupid' => $groupid,
           'groupname' => $groupname
         );
-
-        $exercises = $this->get_exercises_for_DB($data);
 
         if ($submarkersubmission) {
           //Update
