@@ -27,13 +27,13 @@ defined('MOODLE_INTERNAL') || die();
 
 
 $string['default'] = 'Enabled by default';
-$string['default_help'] = 'If set, this submission method will be enabled by default for all new assignments.';
+$string['default_help'] = 'If set, this submission plugin will be enabled by default for all new assignments.';
 $string['enabled'] = 'Submission marking';
 $string['enabled_help'] = 'If enabled, students are able to mark which tasks are done for their submission.';
 $string['pluginname'] = 'Submission marker';
 $string['submarker'] = 'Submission marker';
 $string['submarkersubmission'] = 'Allow marking submissions';
 $string['exercisecount'] = 'The amount of exercises';
-$string['exercisecount_help'] = 'The amount of exercises, help';
+$string['exercisecount_help'] = 'Maximum number of exercises per submission';
 $string['no_exercises_returned'] = 'No exercises returned';
 $string['exercise'] = 'Exercise';

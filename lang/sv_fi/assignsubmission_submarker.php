@@ -26,14 +26,14 @@
 defined('MOODLE_INTERNAL') || die();
 
 //Samma på svenska
-$string['default'] = 'Oletusarvoinen käyttöönotto';
-$string['default_help'] = 'Jos asetettu, opiskelijan tehtävienmerkintä on oletusarvioisesti käytössä.';
-$string['enabled'] = 'Opiskelija merkitsee tehtävänsä';
-$string['enabled_help'] = 'Jos asetettu, opiskelija voi merkitä suorittamansa tehtävät tälle palautukselle.';
-$string['pluginname'] = 'Tehtävien merkintä';
-$string['submarker'] = 'Tehtävien merkintä';
-$string['submarkersubmission'] = 'Hyväksy tehtävien merkintä';
-$string['exercisecount'] = 'Tehtävien lukumäärä';
-$string['exercisecount_help'] = 'Maksimilukumäärä, kuinka monta tehtävää voi palautuksessa olla';
-$string['no_exercises_returned'] = 'No exercises returned';
-$string['exercise'] = 'Tehtävä';
+$string['default'] = 'Standardval';
+$string['default_help'] = 'Om detta väljs kommer samma inlämningssätt att vara standard för alla nya uppgifter.';
+$string['enabled'] = 'Märkning av uppgifter';
+$string['enabled_help'] = 'Om detta väljs kan den studerande märka de uppgifter som är färdiga att inlämnas.';
+$string['pluginname'] = 'Uppgiftsmarkör';
+$string['submarker'] = 'Uppgiftsmarkör';
+$string['submarkersubmission'] = 'Tillåt märkning av uppgifter';
+$string['exercisecount'] = 'Antalet uppgifter';
+$string['exercisecount_help'] = 'Maximalt antal uppgifter som tillåts per inlämning';
+$string['no_exercises_returned'] = 'Inga inlämnade uppgifter';
+$string['exercise'] = 'Uppgift';

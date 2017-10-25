@@ -28,12 +28,12 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['default'] = 'Oletusarvoinen käyttöönotto';
 $string['default_help'] = 'Jos asetettu, opiskelijan tehtävienmerkintä on oletusarvioisesti käytössä.';
-$string['enabled'] = 'Opiskelija merkitsee tehtävänsä';
+$string['enabled'] = 'Tehtävien merkintä';
 $string['enabled_help'] = 'Jos asetettu, opiskelija voi merkitä suorittamansa tehtävät tälle palautukselle.';
 $string['pluginname'] = 'Tehtävien merkintä';
 $string['submarker'] = 'Tehtävien merkintä';
-$string['submarkersubmission'] = 'Hyväksy tehtävien merkintä';
+$string['submarkersubmission'] = 'Mahdollista tehtävien merkintä';
 $string['exercisecount'] = 'Tehtävien lukumäärä';
-$string['exercisecount_help'] = 'Maksimilukumäärä, kuinka monta tehtävää voi palautuksessa olla';
+$string['exercisecount_help'] = 'Kuinka monta tehtävää palautuksessa voi enintään olla';
 $string['no_exercises_returned'] = 'Ei palautettuja tehtäviä';
 $string['exercise'] = 'Tehtävä';
