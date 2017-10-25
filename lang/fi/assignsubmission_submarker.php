@@ -37,3 +37,4 @@ $string['exercisecount'] = 'Tehtävien lukumäärä';
 $string['exercisecount_help'] = 'Kuinka monta tehtävää palautuksessa voi enintään olla';
 $string['no_exercises_returned'] = 'Ei palautettuja tehtäviä';
 $string['exercise'] = 'Tehtävä';
+$string['selectall'] = 'Valitse kaikki';

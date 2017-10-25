@@ -27,6 +27,7 @@
 defined('MOODLE_INTERNAL') || die();
 // File area for submarker submission assignment.
 define('ASSIGNSUBMISSION_SUBMARKER_FILEAREA', 'submissions_submarker');
+require_once('student_form.php');
 
 /**
  * library class for submarker submission plugin extending submission plugin base class
@@ -115,14 +116,33 @@ class assign_submission_submarker extends assign_submission_plugin {
                 $checked = $submarkersubmission->exercises;
             }
         }
-
+        
+        $groupid = 1;
+        $i = 0;
+        $max = $this->get_config('exercisecount');
+        while (true) {
+            $checked = $checked . "0";
+            $checkboxarray=array();
+            for ($j = 0; $j < 3; $j++) {
+                $i++;
+                if ($i <= $max) {
+                    $checkboxarray[] =& $mform->createElement('advcheckbox', 'exerchkbox' . ($i),  get_string('exercise', 'assignsubmission_submarker') . ' ' . ($i), null, array('group' => $groupid));
+                }
+            }
+            $mform->addGroup($checkboxarray, 'chkboxar', '', array(' '), false);
+            if ($i > $max) {
+                break;
+            }          
+        }
+        
         for ($i = 1; $i <= $this->get_config('exercisecount'); $i++) {
             $checked = $checked . "0";
-            $mform->addElement('advcheckbox', 'exerchkbox' . ($i), get_string('exercise', 'assignsubmission_submarker') . ' ' . ($i), null, array(group => 1));
             if ($checked[$i-1] == 1) {
                 $mform->setDefault('exerchkbox' . ($i), true);
             }
         }
+        $student_form = new student_form();
+        $student_form->draw_checkbox_controller($mform, $groupid, get_string('selectall', 'assignsubmission_submarker'));
         return true;
     }
 

@@ -37,3 +37,4 @@ $string['exercisecount'] = 'Antalet uppgifter';
 $string['exercisecount_help'] = 'Maximalt antal uppgifter som tillåts per inlämning';
 $string['no_exercises_returned'] = 'Inga inlämnade uppgifter';
 $string['exercise'] = 'Uppgift';
+$string['selectall'] = 'Välj alla';
