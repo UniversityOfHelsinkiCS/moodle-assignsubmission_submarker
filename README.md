@@ -6,7 +6,7 @@ Moodle plugin to mark completed exercises
 
 ## Installation ##
 
-Pull this repository to moodle/mod/assign/submission
+Pull this repository as moodle/mod/assign/submission/submarker
 
 ## Credits ##
 
