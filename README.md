@@ -1,8 +1,21 @@
 # Submission marker #
 
-Moodle plugin to upload files and mark completed exercise
+Moodle plugin to mark completed exercises
 
-TODO Provide more detailed description here.
+![Submission marker](https://raw.githubusercontent.com/UniversityOfHelsinkiCS/submarker/master/submarker.png)
+
+## Installation ##
+
+Pull this repository to moodle/mod/assign/submission
+
+## Credits ##
+
+Thanks to
+Adrian Greeve, Rajesh Taneja, Frédéric Massart, NetSpot
+for creating the comment, file and onlinetext submission types which this plugin is modeled after.
+
+Jami Kousa,
+Tuomo Torppa
 
 ## License ##
 
