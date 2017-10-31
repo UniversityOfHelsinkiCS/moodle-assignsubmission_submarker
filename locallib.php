@@ -168,15 +168,22 @@ class assign_submission_submarker extends assign_submission_plugin {
         return true;
     }
 
-    function exercises_to_text($data) {
-        $checked = "";
-        foreach($data as $key=>$value) {
-            if (substr( $key, 0, 10 ) === "exerchkbox") {
-                $checked = $checked . $value;
-            }
-        }
-        return $checked;
-    }
+
+    /*
+    function debugObject(stdClass $obj) {
+        $serialized = serialize($obj);
+        $log = fopen("/tmp/debugfile.txt", "a");
+        fwrite($log, "\nObject:\n\n");
+        fwrite($log, $serialized);
+        fclose($log);
+      }
+    function debug($vari) {
+        $log = fopen("/tmp/debugfile.txt", "a");
+        fwrite($log, "\nVariable:\n\n");
+        fwrite($log, $vari);
+        fclose($log);
+      }
+    */
 
     /**
      * Save data to the database.
@@ -242,18 +249,16 @@ class assign_submission_submarker extends assign_submission_plugin {
           'groupname' => $groupname
         );
 
+        $creatednew = false;
         if ($submarkersubmission) {
           //Update
           $submarkersubmission->exercises = $exercises;
           $params['objectid'] = $submarkersubmission->id;
           $updatestatus = $DB->update_record('assignsubmission_submarker', $submarkersubmission);
           $event = \assignsubmission_submarker\event\submission_updated::create($params);
-          $event->set_assign($this->assignment);
-          $event->trigger();
-
-          return $updatestatus;
         } else {
           //Create
+          $creatednew = true;
           $submarkersubmission = new stdClass();
           $submarkersubmission->exercises = $exercises;
 
@@ -262,12 +267,44 @@ class assign_submission_submarker extends assign_submission_plugin {
           $submarkersubmission->id = $DB->insert_record('assignsubmission_submarker', $submarkersubmission);
           $params['objectid'] = $submarkersubmission->id;
           $event = \assignsubmission_submarker\event\submission_created::create($params);
-          $event->set_assign($this->assignment);
-          $event->trigger();
-          return $submarkersubmission->id > 0;
+        }
+        $event->set_assign($this->assignment);
+        $event->trigger();
+
+        //Giving grade has to be after submission to get the submission and attemptnumber to match it from DB.
+        $grade = $this->assignment->get_user_grade($USER->id, true, $submission->attemptnumber);
+        $grade->grade = $this->get_completed_exercise_count($exercises);
+        $this->assignment->update_grade($grade);
+
+        if ($creatednew) {
+            return $submarkersubmission->id > 0;            
+        } else {
+            return $updatestatus;            
         }
     }
 
+    /**
+     * Makes the exercises saveable to database. Used during save.
+     * 
+     * @param string $data is the data from submission
+     * @return string The exercises in "binary" form: "00110"
+     */
+    function exercises_to_text($data) {
+        $checked = "";
+        foreach($data as $key=>$value) {
+            if (substr( $key, 0, 10 ) === "exerchkbox") {
+                $checked = $checked . $value;
+            }
+        }
+        return $checked;
+    }
+
+    /**
+     * Makes the exercise count human readable. Used to create the summary.
+     * 
+     * @param string $exercises is the "binary" format of the exercises
+     * @return string The exercises in human readable form: "1, 2, 5"
+     */
     public function exercises_readable($exercises) {
       $res = '';
       for ($i = 1; $i <= strlen($exercises); $i++){
@@ -281,6 +318,22 @@ class assign_submission_submarker extends assign_submission_plugin {
         $res = get_string('no_exercises_returned', 'assignsubmission_submarker');
       }
       return $res;
+    }
+
+    /**
+     * Counts the number of completed exercises. Used to grade.
+     * 
+     * @param string $exercises is the "binary" format of the exercises
+     * @return string The exercise count.
+     */
+    function get_completed_exercise_count($exercises) {
+        $count = 0;
+        for ($i = 0; $i < strlen($exercises); $i++){
+            if ($exercises[$i] == '1') {
+                $count++;
+            }
+        }
+        return $count;
     }
 
     /**
