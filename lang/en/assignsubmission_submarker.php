@@ -35,6 +35,7 @@ $string['submarker'] = 'Submission marker';
 $string['submarkersubmission'] = 'Allow marking submissions';
 $string['exercisecount'] = 'The amount of exercises';
 $string['exercisecount_help'] = 'Maximum number of exercises per submission';
+$string['exerciseteacher_help'] = 'If submission marking is enabled, this is the amount of checkboxes that will be presented to student';
 $string['no_exercises_returned'] = 'No exercises returned';
 $string['exercise'] = 'Exercise';
 $string['selectall'] = 'Select all';

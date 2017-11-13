@@ -35,6 +35,7 @@ $string['submarker'] = 'Uppgiftsmarkör';
 $string['submarkersubmission'] = 'Tillåt märkning av uppgifter';
 $string['exercisecount'] = 'Antalet uppgifter';
 $string['exercisecount_help'] = 'Maximalt antal uppgifter som tillåts per inlämning';
+$string['exerciseteacher_help'] = 'Maximalt antal uppgifter som tillåts per inlämning'; //TODO: Ask for advice
 $string['no_exercises_returned'] = 'Inga inlämnade uppgifter';
 $string['exercise'] = 'Uppgift';
 $string['selectall'] = 'Välj alla';

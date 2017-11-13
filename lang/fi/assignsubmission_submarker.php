@@ -35,6 +35,7 @@ $string['submarker'] = 'Tehtävien merkintä';
 $string['submarkersubmission'] = 'Mahdollista tehtävien merkintä';
 $string['exercisecount'] = 'Tehtävien lukumäärä';
 $string['exercisecount_help'] = 'Kuinka monta tehtävää palautuksessa voi enintään olla';
+$string['exerciseteacher_help'] = 'Jos tehtävien merkitseminen on aktivoitu, niin tämä on se määrä ruutuja mihin opiskelijan voi laittaa rastin.';
 $string['no_exercises_returned'] = 'Ei palautettuja tehtäviä';
 $string['exercise'] = 'Tehtävä';
 $string['selectall'] = 'Valitse kaikki';

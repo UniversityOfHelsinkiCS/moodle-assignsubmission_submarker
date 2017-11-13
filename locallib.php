@@ -134,27 +134,34 @@ class assign_submission_submarker extends assign_submission_plugin {
                 break;
             }          
         }
-        
+        // Select exercises that are already done.
         for ($i = 1; $i <= $this->get_config('exercisecount'); $i++) {
             $checked = $checked . "0";
             if ($checked[$i-1] == 1) {
                 $mform->setDefault('exerchkbox' . ($i), true);
             }
         }
-        $student_form = new student_form();
-        $student_form->draw_checkbox_controller($mform, $groupid, get_string('selectall', 'assignsubmission_submarker'));
+        // If there are more than 1 exercise, render a "select all" button.
+        if ($max > 1) {
+            $student_form = new student_form();
+            $student_form->draw_checkbox_controller($mform, $groupid, get_string('selectall', 'assignsubmission_submarker'));
+        }
         return true;
     }
 
     public function get_settings(MoodleQuickForm $mform) {
         $settings = array();
         $options = array();
-        for ($i = 1; $i <= get_config('assignsubmission_submarker', 'exercisecount'); $i++) {
+        for ($i = 0; $i <= get_config('assignsubmission_submarker', 'exercisecount'); $i++) {
             $options[$i] = $i;
         }
         $name = get_string('exercisecount', 'assignsubmission_submarker');
 
         $mform->addElement('select', 'assignsubmission_submarker_exercisecount', $name, $options);
+        $mform->addHelpButton('assignsubmission_submarker_exercisecount',
+                'exerciseteacher_help',
+                'assignsubmission_submarker');
+        $mform->disabledIf('assignsubmission_submarker_exercisecount', 'assignsubmission_submarker_enabled', 'notchecked');
     }
 
     /**
